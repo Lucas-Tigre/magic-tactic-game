@@ -1,0 +1,461 @@
+/* Reset e configurações básicas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #2c5530, #1a3d1f);
+    color: #fff;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* Telas do jogo */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Menu Principal */
+#main-menu {
+    background: linear-gradient(135deg, #1a3d1f, #2c5530);
+    text-align: center;
+}
+
+#main-menu h1 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    color: #ffd700;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu-buttons button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #4a7c59, #2c5530);
+    color: #fff;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-buttons button:hover {
+    background: linear-gradient(135deg, #5a8c69, #3c6540);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Tela de Instruções */
+#instructions-screen {
+    background: linear-gradient(135deg, #1a3d1f, #2c5530);
+    padding: 2rem;
+}
+
+#instructions-screen h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.instructions-content {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.instructions-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+#back-to-menu {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #4a7c59, #2c5530);
+    color: #fff;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#back-to-menu:hover {
+    background: linear-gradient(135deg, #5a8c69, #3c6540);
+    transform: translateY(-2px);
+}
+
+/* Tela do Jogo */
+#game-screen {
+    flex-direction: column;
+    padding: 0;
+}
+
+#hud {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border-bottom: 2px solid #ffd700;
+}
+
+.player-stats {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.stat-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-bar label {
+    font-weight: bold;
+    min-width: 50px;
+}
+
+.bar {
+    width: 150px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+.bar-fill.hp {
+    background: linear-gradient(90deg, #ff4444, #cc0000);
+}
+
+.bar-fill.mp {
+    background: linear-gradient(90deg, #4444ff, #0000cc);
+}
+
+.level-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.9rem;
+}
+
+#map-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #2c5530, #1a3d1f);
+}
+
+#game-canvas {
+    border: 3px solid #ffd700;
+    border-radius: 10px;
+    background: #228B22;
+}
+
+/* Tela de Combate */
+#battle-screen {
+    background: linear-gradient(135deg, #4a1a1a, #2a1010);
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.battle-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+}
+
+.enemy-section, .player-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sprite {
+    width: 120px;
+    height: 120px;
+    border: 3px solid #ffd700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: linear-gradient(135deg, #4a7c59, #2c5530);
+}
+
+.enemy-stats, .player-battle-stats {
+    text-align: center;
+}
+
+.enemy-stats h3, .player-battle-stats h3 {
+    margin-bottom: 0.5rem;
+    color: #ffd700;
+}
+
+.battle-ui {
+    width: 100%;
+    max-width: 600px;
+}
+
+.message-box {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.action-menu {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.action-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, #4a7c59, #2c5530);
+    color: #fff;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: linear-gradient(135deg, #5a8c69, #3c6540);
+    transform: translateY(-2px);
+}
+
+.spell-menu {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1.5rem;
+    border: 2px solid #ffd700;
+    border-radius: 15px;
+    margin-top: 1rem;
+}
+
+.spell-menu.hidden {
+    display: none;
+}
+
+.spell-menu h4 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.spell-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.spell-btn {
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #4a7c59, #2c5530);
+    color: #fff;
+    border: 1px solid #ffd700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.spell-btn:hover {
+    background: linear-gradient(135deg, #5a8c69, #3c6540);
+}
+
+.spell-btn .spell-name {
+    font-weight: bold;
+    display: block;
+}
+
+.spell-btn .spell-cost {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+#back-to-actions {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #7c4a4a, #5c3030);
+    color: #fff;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#back-to-actions:hover {
+    background: linear-gradient(135deg, #8c5a5a, #6c4040);
+}
+
+/* Tela de Level Up */
+#levelup-screen {
+    background: linear-gradient(135deg, #1a3d1f, #2c5530);
+    padding: 2rem;
+}
+
+#levelup-screen h2 {
+    font-size: 2.5rem;
+    color: #ffd700;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.levelup-content {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+}
+
+.levelup-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.stat-distribution {
+    margin: 2rem 0;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.stat-btn {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #4a7c59, #2c5530);
+    color: #fff;
+    border: 1px solid #ffd700;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.stat-btn:hover {
+    background: linear-gradient(135deg, #5a8c69, #3c6540);
+    transform: scale(1.1);
+}
+
+#confirm-stats {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #4a7c59, #2c5530);
+    color: #fff;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#confirm-stats:hover {
+    background: linear-gradient(135deg, #5a8c69, #3c6540);
+    transform: translateY(-2px);
+}
+
+/* Tela de Game Over */
+#gameover-screen {
+    background: linear-gradient(135deg, #4a1a1a, #2a1010);
+    text-align: center;
+}
+
+#gameover-title {
+    font-size: 3rem;
+    color: #ff4444;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+#gameover-message {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #ccc;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    #main-menu h1 {
+        font-size: 2.5rem;
+    }
+    
+    .player-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .bar {
+        width: 120px;
+    }
+    
+    #game-canvas {
+        width: 90vw;
+        height: 60vh;
+    }
+    
+    .battle-area {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .action-menu {
+        flex-direction: column;
+    }
+    
+    .spell-list {
+        grid-template-columns: 1fr;
+    }
+}
+
