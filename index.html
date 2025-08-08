@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Tactic</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Menu Principal -->
+        <div id="main-menu" class="screen active">
+            <h1>Magic Tactic</h1>
+            <div class="menu-buttons">
+                <button id="start-game">Iniciar Jogo</button>
+                <button id="instructions">Instruções</button>
+            </div>
+        </div>
+
+        <!-- Tela de Instruções -->
+        <div id="instructions-screen" class="screen">
+            <h2>Como Jogar</h2>
+            <div class="instructions-content">
+                <p>• Use as setas do teclado para mover seu mago pelo mapa</p>
+                <p>• Toque nos inimigos para iniciar o combate</p>
+                <p>• No combate, escolha seus feitiços sabiamente</p>
+                <p>• Elementos têm vantagens: Fogo > Água, Água > Terra, Terra > Ar, Ar > Fogo</p>
+                <p>• Luz e Trevas são opostos e se anulam</p>
+                <p>• Derrote todos os 5 Magos Negros para enfrentar o Rei das Trevas</p>
+            </div>
+            <button id="back-to-menu">Voltar</button>
+        </div>
+
+        <!-- Tela do Jogo -->
+        <div id="game-screen" class="screen">
+            <!-- HUD -->
+            <div id="hud">
+                <div class="player-stats">
+                    <div class="stat-bar">
+                        <label>Vida:</label>
+                        <div class="bar">
+                            <div id="player-hp-bar" class="bar-fill hp"></div>
+                        </div>
+                        <span id="player-hp-text">100/100</span>
+                    </div>
+                    <div class="stat-bar">
+                        <label>Mana:</label>
+                        <div class="bar">
+                            <div id="player-mp-bar" class="bar-fill mp"></div>
+                        </div>
+                        <span id="player-mp-text">50/50</span>
+                    </div>
+                    <div class="level-info">
+                        <span id="player-level">Nível: 1</span>
+                        <span id="player-exp">EXP: 0/100</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área do Mapa -->
+            <div id="map-container">
+                <canvas id="game-canvas" width="800" height="600"></canvas>
+            </div>
+        </div>
+
+        <!-- Tela de Combate -->
+        <div id="battle-screen" class="screen">
+            <div class="battle-area">
+                <div class="enemy-section">
+                    <div id="enemy-sprite" class="sprite"></div>
+                    <div class="enemy-stats">
+                        <h3 id="enemy-name">Mago Negro</h3>
+                        <div class="stat-bar">
+                            <div class="bar">
+                                <div id="enemy-hp-bar" class="bar-fill hp"></div>
+                            </div>
+                            <span id="enemy-hp-text">80/80</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="player-section">
+                    <div id="player-sprite" class="sprite"></div>
+                    <div class="player-battle-stats">
+                        <h3>Mago Herói</h3>
+                        <div class="stat-bar">
+                            <div class="bar">
+                                <div id="battle-player-hp-bar" class="bar-fill hp"></div>
+                            </div>
+                            <span id="battle-player-hp-text">100/100</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div class="bar">
+                                <div id="battle-player-mp-bar" class="bar-fill mp"></div>
+                            </div>
+                            <span id="battle-player-mp-text">50/50</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="battle-ui">
+                <div id="battle-message" class="message-box">
+                    Escolha sua ação!
+                </div>
+
+                <div id="battle-actions" class="action-menu">
+                    <button class="action-btn" id="attack-btn">Atacar</button>
+                    <button class="action-btn" id="defend-btn">Defender</button>
+                    <button class="action-btn" id="run-btn">Fugir</button>
+                </div>
+
+                <div id="spell-menu" class="spell-menu hidden">
+                    <h4>Escolha um Feitiço:</h4>
+                    <div id="spell-list" class="spell-list">
+                        <!-- Feitiços serão adicionados dinamicamente -->
+                    </div>
+                    <button id="back-to-actions">Voltar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Level Up -->
+        <div id="levelup-screen" class="screen">
+            <h2>Level Up!</h2>
+            <div class="levelup-content">
+                <p>Você subiu para o nível <span id="new-level">2</span>!</p>
+                <p>Você tem <span id="stat-points">3</span> pontos para distribuir:</p>
+                
+                <div class="stat-distribution">
+                    <div class="stat-row">
+                        <span>Vida:</span>
+                        <button class="stat-btn" data-stat="hp">+</button>
+                        <span id="hp-points">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Mana:</span>
+                        <button class="stat-btn" data-stat="mp">+</button>
+                        <span id="mp-points">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Ataque Mágico:</span>
+                        <button class="stat-btn" data-stat="attack">+</button>
+                        <span id="attack-points">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Defesa Mágica:</span>
+                        <button class="stat-btn" data-stat="defense">+</button>
+                        <span id="defense-points">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Velocidade:</span>
+                        <button class="stat-btn" data-stat="speed">+</button>
+                        <span id="speed-points">0</span>
+                    </div>
+                </div>
+                
+                <button id="confirm-stats">Confirmar</button>
+            </div>
+        </div>
+
+        <!-- Tela de Game Over -->
+        <div id="gameover-screen" class="screen">
+            <h2 id="gameover-title">Game Over</h2>
+            <p id="gameover-message">Você foi derrotado!</p>
+            <div class="menu-buttons">
+                <button id="restart-game">Jogar Novamente</button>
+                <button id="back-to-main">Menu Principal</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/enhanced-game.js"></script>
+</body>
+</html>
